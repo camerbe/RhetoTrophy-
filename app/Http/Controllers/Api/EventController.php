@@ -6,6 +6,7 @@ use App\Repositories\EventRepository;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Response;
 
 class EventController extends Controller
@@ -55,7 +56,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         //
-        Log::debug($request);
+
         $evts=$this->eventrepository->create($request->all());
         if($evts){
             return response()->json([
@@ -140,17 +141,18 @@ class EventController extends Controller
     {
         //
         $evt=$this->eventrepository->delete($id);
-        if($evt){
-            return response()->json([
-                "sucess"=>false,
-                "message"=>"Une erreur s'est produite...",
-            ],Response::HTTP_NOT_FOUND);
-        }
-        else{
+        if($evt>0){
             return response()->json([
                 "sucess"=>true,
                 "message"=>"Suppression réussie",
             ],Response::HTTP_OK);
+
+        }
+        else{
+            return response()->json([
+                "sucess"=>false,
+                "message"=>"Une erreur s'est produite...",
+            ],Response::HTTP_NOT_FOUND);
         }
     }
 }

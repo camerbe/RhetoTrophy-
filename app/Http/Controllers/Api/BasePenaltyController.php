@@ -116,7 +116,7 @@ class BasePenaltyController extends Controller
     {
         //
         $workshop=$this->basepenaltyrepository->delete($id);
-        if($workshop){
+        if($workshop<=0){
             return response()->json([
                 "sucess"=>false,
                 "message"=>"Une erreur s'est produite...",

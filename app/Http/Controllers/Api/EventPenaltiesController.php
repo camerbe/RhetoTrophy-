@@ -117,7 +117,7 @@ class EventPenaltiesController extends Controller
     {
         //
         $workshop=$this->eventpenaltiesrepository->delete($id);
-        if($workshop){
+        if($workshop<=0){
             return response()->json([
                 "sucess"=>false,
                 "message"=>"Une erreur s'est produite...",

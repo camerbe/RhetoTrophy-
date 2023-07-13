@@ -34,6 +34,7 @@
                 return new EventResource($this->findById($oid)) ;
             }
             catch(Exception $ex){
+                //Log::debug($ex->getMessage());
                 return $ex->getMessage();
             }
 

@@ -134,7 +134,7 @@ class EventTeamsController extends Controller
     {
         //
         $evt=$this->eventteamsrepository->delete($id);
-        if($evt){
+        if($evt<=0){
             return response()->json([
                 "sucess"=>false,
                 "message"=>"Une erreur s'est produite...",
