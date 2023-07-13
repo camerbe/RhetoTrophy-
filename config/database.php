@@ -86,7 +86,7 @@ return [
             'port' => env('DB_PORT', '1433'),
             'database' => env('DB_DATABASE', 'RhetoTrophy2023'),
             'username' => env('DB_USERNAME', 'elisa'),
-            'password' => env('DB_PASSWORD', 'elisa2007'),
+            'password' => env('DB_PASSWORD', 'Vellozzi1962%'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
