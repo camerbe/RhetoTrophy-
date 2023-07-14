@@ -82,10 +82,10 @@ return [
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             //'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '172.26.176.1'),
+            'host' => env('DB_HOST', '172.18.160.1'),
             'port' => env('DB_PORT', '1433'),
             'database' => env('DB_DATABASE', 'RhetoTrophy2023'),
-            'username' => env('DB_USERNAME', 'elisa'),
+            'username' => env('DB_USERNAME', 'tristan'),
             'password' => env('DB_PASSWORD', 'Vellozzi1962%'),
             'charset' => 'utf8',
             'prefix' => '',
@@ -93,6 +93,7 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'true'),
         ],
+
 
     ],
 
