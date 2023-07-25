@@ -23,6 +23,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->RegisterEventPenaltiesRepo();
         $this->RegisterBasePenaltyRepo();
         $this->RegisterEventTeamTrackWorkshopsRepo();
+        $this->RegisterEventTrackWorkshopBonusMalusRepo();
+        $this->RegisterEventTrackWorkshopRepo();
     }
 
     /**
@@ -56,5 +58,13 @@ class RepositoryServiceProvider extends ServiceProvider
     public function RegisterEventTeamTrackWorkshopsRepo(){
         return $this->app->bind(BaseRepository::class,EventTeamTrackWorkshopsRepository::class);
     }
+    public function RegisterEventTrackWorkshopBonusMalusRepo(){
+        return $this->app->bind(BaseRepository::class,EventTrackWorkshopBonusMalusRepository::class);
+    }
+    public function RegisterEventTrackWorkshopRepo(){
+        return $this->app->bind(BaseRepository::class,EventTrackWorkshopRepository::class);
+    }
+
+    
 
 }

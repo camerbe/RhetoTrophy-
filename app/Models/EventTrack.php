@@ -37,4 +37,8 @@ class EventTrack extends Model
     {
         return $this->hasMany(EventTeamTrack::class);
     }
+    public function eventrackworkshops()
+    {
+        return $this->hasMany(EventTrackWorkshop::class);
+    }
 }

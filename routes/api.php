@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\EventTeamTrackController;
 use App\Http\Controllers\Api\EventPenaltiesController;
 use App\Http\Controllers\Api\BasePenaltyController;
 use App\Http\Controllers\Api\EventTeamTrackWorkshopController;
+use App\Http\Controllers\Api\EventTrackWorkshopBonusMalusController;
+use App\Http\Controllers\Api\EventTrackWorkshopsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,11 +27,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });*/
-Route::apiResources(['events'=> EventController::class]);
-Route::apiResources(['workshopmeasures'=> WorkshopMeasuresController::class]);
-Route::apiResources(['eventteams'=> EventTeamsController::class]);
-Route::apiResources(['eventtracks'=> EventTracksController::class]);
-Route::apiResources(['eventteamtracks'=> EventTeamTrackController::class]);
-Route::apiResources(['eventpenalties'=> EventPenaltiesController::class]);
-Route::apiResources(['basepenalties'=> BasePenaltyController::class]);
-Route::apiResources(['eventteamtrackworkshops'=> EventTeamTrackWorkshopController::class]);
+Route::apiResources([
+    'events'=> EventController::class,
+    'workshopmeasures'=> WorkshopMeasuresController::class,
+    'workshopmeasures'=> WorkshopMeasuresController::class,
+    'eventteams'=> EventTeamsController::class,
+    'eventtracks'=> EventTracksController::class,
+    'eventteamtracks'=> EventTeamTrackController::class,
+    'eventpenalties'=> EventPenaltiesController::class,
+    'basepenalties'=> BasePenaltyController::class,
+    'eventteamtrackworkshops'=> EventTeamTrackWorkshopController::class,
+    'eventTrackworkshopbonusmalus'=> EventTrackWorkshopBonusMalusController::class,
+    'eventtrackworkshops'=> EventTrackWorkshopsController::class,
+]);
+Route::get('/eventtrackworkshops/code/{code}', [EventTrackWorkshopsController::class, 'findByCode']);
+

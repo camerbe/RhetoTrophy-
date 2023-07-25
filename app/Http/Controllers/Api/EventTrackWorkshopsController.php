@@ -1,20 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Controller;
-use App\Repositories\EventRepository;
-use App\Models\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Response;
+use App\Repositories\EventTrackWorkshopRepository;
 
-class EventController extends Controller
+class EventTrackWorkshopsController extends Controller
 {
-    protected $eventrepository;
+    protected $eventtrackworkshoprepository;
 
-    public function __construct(EventRepository $eventrepository){
-        $this->eventrepository=$eventrepository;
+    public function __construct(EventTrackWorkshopRepository $eventtrackworkshoprepository){
+        $this->eventtrackworkshoprepository=$eventtrackworkshoprepository;
     }
     /**
      * Display a listing of the resource.
@@ -22,12 +20,12 @@ class EventController extends Controller
     public function index()
     {
         //
-        $evts=$this->eventrepository->findAll();
+        $evts=$this->eventtrackworkshoprepository->findAll();
         if($evts){
             return response()->json([
                 "sucess"=>true,
                 "data"=>$evts,
-                "message"=>"Liste des Events",
+                "message"=>"Liste des EventTrackWorkshop",
 
             ],Response::HTTP_CREATED);
         }
@@ -38,16 +36,6 @@ class EventController extends Controller
 
             ],Response::HTTP_NOT_FOUND);
         }
-
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -56,13 +44,12 @@ class EventController extends Controller
     public function store(Request $request)
     {
         //
-
-        $evts=$this->eventrepository->create($request->all());
+        $evts=$this->eventtrackworkshoprepository->create($request->all());
         if($evts){
             return response()->json([
                 "sucess"=>true,
                 "data"=>$evts,
-                "message"=>"Insertion de l'Events",
+                "message"=>"Insertion de l'EventTrackWorkshop",
 
             ],Response::HTTP_CREATED);
         }
@@ -73,50 +60,59 @@ class EventController extends Controller
 
             ],Response::HTTP_BAD_REQUEST);
         }
-
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id)
     {
         //
-        $evts=$this->eventrepository->findById($id);
+        $evts=$this->eventtrackworkshoprepository->findById($id);
         if($evts){
             return response()->json([
                 "sucess"=>true,
                 "data"=>$evts,
-                "message"=>"Events trouvé",
+                "message"=>"EventTrackWorkshop trouvé",
 
-            ],Response::HTTP_OK);
+            ],Response::HTTP_FOUND);
         }
         else{
             return response()->json([
                 "sucess"=>false,
-                "message"=>"Events inexistant ...",
+                "message"=>"EventTrackWorkshop inexistant ...",
+
+            ],Response::HTTP_NOT_FOUND);
+        }
+    }
+    public function findByCode(string $code)
+    {
+        //
+        $evts=$this->eventtrackworkshoprepository->findByCode($code);
+        if($evts){
+            return response()->json([
+                "sucess"=>true,
+                "data"=>$evts,
+                "message"=>"EventTrackWorkshops trouvés",
+
+            ],Response::HTTP_FOUND);
+        }
+        else{
+            return response()->json([
+                "sucess"=>false,
+                "message"=>"EventTrackWorkshop inexistant ...",
 
             ],Response::HTTP_NOT_FOUND);
         }
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, string $id)
     {
         //
-        //dd($request);
-        $evts=$this->eventrepository->update($request->except(['Oid']), $id);
+        $evts=$this->eventtrackworkshoprepository->update($request->except(['Oid']), $id);
         if($evts){
             return response()->json([
                 "sucess"=>true,
@@ -137,22 +133,23 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         //
-        $evt=$this->eventrepository->delete($id);
-        if($evt>0){
-            return response()->json([
-                "sucess"=>true,
-                "message"=>"Suppression réussie",
-            ],Response::HTTP_OK);
-
-        }
-        else{
+        $evt=$this->eventtrackworkshoprepository->delete($id);
+        if($evt<=0){
             return response()->json([
                 "sucess"=>false,
                 "message"=>"Une erreur s'est produite...",
+
             ],Response::HTTP_NOT_FOUND);
+        }
+        else{
+            return response()->json([
+                "sucess"=>true,
+                "message"=>"Suppression réussie",
+
+            ],Response::HTTP_OK);
         }
     }
 }
