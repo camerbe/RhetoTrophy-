@@ -50,7 +50,13 @@
 
         }
         public function findAll(){
-            $evt=EventTeam::orderBy('Name','asc')->paginate();
+           // $evt=EventTeam::orderBy('Name','asc')->paginate();
+            
+
+            $evt= EventTeam::orderBy('EventTeams.Name','asc')
+                    ->join('Events','Events.Oid','=','EventTeams.EventOid')
+                    ->select('EventTeams.*','Events.Code')
+                    ->get();
             return EventTeamsResource::collection($evt);
          }
     }

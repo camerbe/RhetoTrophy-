@@ -4,6 +4,8 @@
     use App\Http\Resources\EventResource;
     use App\Repositories\BaseRepository;
     use Illuminate\Support\Str;
+    use Carbon\Carbon;
+    use Illuminate\Support\Facades\Cache;
 
     use Exception;
 
@@ -45,10 +47,16 @@
             catch(Exception $ex){
                 return $ex->getMessage();
             }
-
-
         }
         public function findAll(){
-           return BasePenalty::orderBy('Oid','desc')->paginate();
-         }
+            
+           if($basepenalty=Cache::get('basepenalty-list')){
+                return $basepenalty;
+            }
+            $basepenalty=BasePenalty::orderBy('Oid','desc')->paginate();
+            Cache::set('basepenalty-list',$basepenalty,Carbon::now()->addMinutes(60));
+            return $basepenalty;
+        }
+
+
     }

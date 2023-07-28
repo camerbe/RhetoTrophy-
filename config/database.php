@@ -82,7 +82,7 @@ return [
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             //'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '172.21.64.1'),
+            'host' => env('DB_HOST', '172.20.16.1'),
             'port' => env('DB_PORT', '1433'),
             'database' => env('DB_DATABASE', 'RhetoTrophy2023'),
             'username' => env('DB_USERNAME', 'tristan'),

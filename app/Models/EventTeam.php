@@ -8,30 +8,35 @@ use Illuminate\Database\Eloquent\Model;
 class EventTeam extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'Oid';
+    
+    const EventOid = 'EventOid';
+
+    protected $primaryKey = 'oid';
     public $timestamps = false;
 
     public $incrementing = false;
     public static $snakeAttributes = false;
     protected $table = 'EventTeams';
     protected $fillable = [
-        'Oid',
-        'EventOid',
+        'oid',
+        'eventoid',
         'Position',
-        'TeamNumber',
-        'Name',
-        'ZipCode',
-        'City',
-        'Status',
-        'Notes',
-        'NetTime',
+        'teamnumber',
+        'name',
+        'zipcode',
+        'city',
+        'status',
+        'notes',
+        'nettime',
         'EndTime',
-        'CompletedTracks',
-        'TotalPenalties',
+        'completedtracks',
+        'totalpenalties',
    ];
    protected $casts = [
-    'Oid'=> 'string'
+    'Oid'=> 'string',
+    'oid'=> 'string',
     ];
+    
     public function event()
     {
         return $this->belongsTo(Event::class);

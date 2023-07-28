@@ -4,6 +4,8 @@
     use App\Repositories\BaseRepository;
     use Illuminate\Support\Str;
     use Exception;
+    use Carbon\Carbon;
+    use Illuminate\Support\Facades\Cache;
 
     class EventTracksRepository extends BaseRepository {
         public function __construct(EventTrack $event) {
@@ -50,5 +52,24 @@
         }
         public function findAll(){
             return EventTrack::orderBy('Name','asc')->paginate();
-         }
+        }
+        public function findEventTrackByCode($code="A"){
+            $tmpCode=Str::upper($code);
+            return EventTrack::orderBy('EventTeams.Name','asc')->orderBy('EventTeams.TeamNumber')
+                    ->join('Events','Events.Oid','=','EventTracks.EventOid')
+                    ->join('EventTeams','EventTeams.EventOid','=','Events.Oid')
+                    ->where('EventTracks.Code',$tmpCode)
+                    //->toSql();
+                    ->select(
+                        'EventTracks.Oid as EventTracks_Oid',
+                        'EventTracks.Name as EventTracks_Name',
+                        'EventTracks.Code as EventTracks_Code',
+                        'EventTracks.*',
+                        'Events.Name as Events_Name',
+                        'Events.*',
+                        'EventTeams.Oid as EventTeams_Oid',
+                        'EventTeams.*',
+                        )
+                    ->get();
+        }
     }

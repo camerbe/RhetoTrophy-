@@ -51,13 +51,13 @@
             return EventTrackWorkshop::orderBy('Name','asc')->paginate();
          }
 
-        public function findByCode($code){
+        public function findByCode($code="A"){
             //return EventTrackWorkshop::With['eventtrack']->get();
            
             return EventTrackWorkshop::orderBy('EventTrackWorkshops.SEQ','asc')
                     ->join('EventTracks','EventTracks.Oid','=','EventTrackWorkshops.EventTrackOid')
                     ->where('EventTracks.Code',$code)
-                    ->select('EventTrackWorkshops.*')
+                    ->select('EventTrackWorkshops.*','EventTracks.*')
                     ->get();
             
         }

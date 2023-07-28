@@ -134,4 +134,22 @@ class EventTeamTrackController extends Controller
             ],Response::HTTP_OK);
         }
     }
+    public function findByTrackOidAndTeamOid($TrackOid,$TeamOid){
+        $evts=$this->eventteamtracksRepository->findByTrackOidAndTeamOid($TrackOid,$TeamOid);
+        if($evts){
+            return response()->json([
+                "sucess"=>true,
+                "data"=>$evts,
+                "message"=>"EventTeamTracks trouvé",
+
+            ],Response::HTTP_FOUND);
+        }
+        else{
+            return response()->json([
+                "sucess"=>false,
+                "message"=>"EventTracks inexistant ...",
+
+            ],Response::HTTP_NOT_FOUND);
+        }
+    }
 }

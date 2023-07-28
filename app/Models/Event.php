@@ -20,7 +20,6 @@ class Event extends Model
         'Date',
         'MaxNetTime',
         'OptimisticLockField',
-
     ];
     protected $casts = [
         'Oid'=> 'string'

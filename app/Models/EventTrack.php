@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class EventTrack extends Model
 {
@@ -40,5 +41,17 @@ class EventTrack extends Model
     public function eventrackworkshops()
     {
         return $this->hasMany(EventTrackWorkshop::class);
+    }
+    protected static function boot(){
+        parent::boot();
+        EventTrack::created(function($model){
+            Cache::forget('eventtrack-list');
+        });
+        EventTrack::deleted(function($model){
+            Cache::forget('eventtrack-list');
+        });
+        EventTrack::updated(function($model){
+            Cache::forget('eventtrack-list');
+        });
     }
 }

@@ -102,20 +102,14 @@ class EventController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  $id)
+    
+    public function update(Request $request,$id)
     {
         //
-        //dd($request);
+        
+        //dd($request->all());
         $evts=$this->eventrepository->update($request->except(['Oid']), $id);
         if($evts){
             return response()->json([

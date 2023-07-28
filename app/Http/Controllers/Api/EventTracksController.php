@@ -149,4 +149,25 @@ class EventTracksController extends Controller
             ],Response::HTTP_OK);
         }
     }
+     /**
+     * get EventTrack join Events and EventTeams from storage.
+     */
+    public function findEventTrackByCode($code){
+        $evts=$this->eventtracksrepository->findEventTrackByCode($code);
+        if($evts){
+            return response()->json([
+                "sucess"=>true,
+                "data"=>$evts,
+                "message"=>"EventTracks trouvés",
+
+            ],Response::HTTP_OK);
+        }
+        else{
+            return response()->json([
+                "sucess"=>false,
+                "message"=>"EventTracks inexistant ...",
+
+            ],Response::HTTP_NOT_FOUND);
+        }
+    }
 }

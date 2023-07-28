@@ -46,5 +46,8 @@
         }
         public function findAll(){
             return EventTeamTrack::orderBy('Start','desc')->paginate();
-         }
+        }
+        public function findByTrackOidAndTeamOid($TrackOid,$TeamOid){
+            return EventTeamTrack::Where('TrackOid',$TrackOid)->where('TeamOid',$TeamOid)->get();
+        }
     }

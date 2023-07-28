@@ -26,7 +26,7 @@
 
         }
         public function update(array $input, $oid){
-            dd($input);
+            
             $input['Code']=Str::upper($input['Code']);
             $input['Name']=Str::title($input['Name']);
             try{
@@ -57,7 +57,11 @@
 
         }
         public function findAll(){
-            $evt= Event::orderBy('Name','desc')->orderBy('Date','desc')->paginate();
+            //$evt= Event::orderBy('Name','desc')->orderBy('Date','desc')->paginate();
+            $evt= Event::orderBy('Events.Name','asc')
+                    //->join('EventTeams','Events.Oid','=','EventTeams.EventOid')
+                    ->select('*')
+                    ->get();
             return EventResource::collection($evt);
          }
     }

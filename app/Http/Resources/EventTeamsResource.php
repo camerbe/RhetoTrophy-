@@ -15,7 +15,7 @@ class EventTeamsResource extends JsonResource
     public function toArray(Request $request): array
     {
         return[
-           // 'oid'=>$this->Oid,
+            'oid'=>$this->Oid,
             'eventoid'=>$this->EventOid,
             'position'=>$this->Position,
             'teamnumber'=>$this->TeamNumber,
@@ -30,6 +30,8 @@ class EventTeamsResource extends JsonResource
             'endtime'=>$this->EndTime,
            'completedtracks'=>$this->CompletedTracks,
             'event'=>$this->event,
+            'code'=>$this->Code,
+            
         ];
     }
 }

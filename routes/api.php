@@ -41,4 +41,6 @@ Route::apiResources([
     'eventtrackworkshops'=> EventTrackWorkshopsController::class,
 ]);
 Route::get('/eventtrackworkshops/code/{code}', [EventTrackWorkshopsController::class, 'findByCode']);
+Route::get('/eventtracks/code/{code}', [EventTracksController::class, 'findEventTrackByCode']);
+Route::get('/eventteamtracks/{trackoid}/{teamoid}', [EventTeamTrackController::class, 'findByTrackOidAndTeamOid']);
 

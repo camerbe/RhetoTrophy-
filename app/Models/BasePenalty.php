@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class BasePenalty extends Model
 {
@@ -34,5 +35,17 @@ class BasePenalty extends Model
     public function basepenalty()
     {
         return $this->belongsTo(BasePenalty::class);
+    }
+    protected static function boot(){
+        parent::boot();
+        Categorie::created(function($model){
+            Cache::forget('basepenalty-list');
+        });
+        Categorie::deleted(function($model){
+            Cache::forget('basepenalty-list');
+        });
+        Categorie::updated(function($model){
+            Cache::forget('basepenalty-list');
+        });
     }
 }
